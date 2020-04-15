@@ -1,0 +1,3 @@
+<resources>
+    <string name="app_name">My MVVM Sample Application using Room and Live Data in a RecyclerView</string>
+</resources>
