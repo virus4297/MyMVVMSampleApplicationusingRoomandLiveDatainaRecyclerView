@@ -1,6 +1,7 @@
 package com.example.mymvvmsampleapplicationusingroomandlivedatainarecyclerview;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "note_table")
@@ -13,12 +14,32 @@ public class Note {
 
     private String description;
 
-    private int priority;
+    private String status;
 
-    public Note(String title, String description, int priority) {
+    private String snmp;
+
+    private long bandwidth;
+
+    private long cpu;
+
+    private long ram;
+
+    private long disk;
+
+    private String time;
+
+
+    public Note(String title, String description, String status,String snmp,
+                long bandwidth,long cpu,long ram,long disk,String time) {
         this.title = title;
         this.description = description;
-        this.priority = priority;
+        this.status=status;
+        this.snmp=snmp;
+        this.bandwidth=bandwidth;
+        this.cpu=cpu;
+        this.ram=ram;
+        this.disk=disk;
+        this.time=time;
     }
 
     public void setId(int id) {
@@ -37,7 +58,32 @@ public class Note {
         return description;
     }
 
-    public int getPriority() {
-        return priority;
+    public String getStatus() {
+        return status;
     }
+
+    public String getSnmp() {
+        return snmp;
+    }
+
+    public long getBandwidth() {
+        return bandwidth;
+    }
+
+    public long getCpu() {
+        return cpu;
+    }
+
+    public long getRam() {
+        return ram;
+    }
+
+    public long getDisk() {
+        return disk;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
 }

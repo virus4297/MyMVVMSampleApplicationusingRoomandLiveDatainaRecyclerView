@@ -37,7 +37,13 @@ public abstract class NoteDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
+        }
+
+        @Override
+        public void onOpen(@NonNull SupportSQLiteDatabase db) {
+            //SNMP Async  Data Population Here
             new PopulateDbAsyncTask(instance).execute();
+            super.onOpen(db);
         }
     };
 
@@ -49,9 +55,8 @@ public abstract class NoteDatabase extends RoomDatabase {
         }
         @Override
         protected Void doInBackground(Void... voids) {
-            noteDao.insert(new Note("title1","desc1",1));
-            noteDao.insert(new Note("title2","desc2",2));
-            noteDao.insert(new Note("title3","desc3",2));
+            //SNMP Async  Data Population Here
+            noteDao.insert(new Note("title1","desc1","up","yes",123,456,789,4682,"5:6pm"));
             return null;
         }
     }

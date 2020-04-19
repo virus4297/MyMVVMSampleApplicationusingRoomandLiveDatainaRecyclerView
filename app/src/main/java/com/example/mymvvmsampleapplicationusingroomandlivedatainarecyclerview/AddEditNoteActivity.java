@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class AddEditNoteActivity extends AppCompatActivity {
@@ -19,12 +20,30 @@ public class AddEditNoteActivity extends AppCompatActivity {
             "com.example.mymvvmsampleapplicationusingroomandlivedatainarecyclerview.EXTRA_TITLE";
     public static final String EXTRA_DESCRIPTION =
             "com.example.mymvvmsampleapplicationusingroomandlivedatainarecyclerview.EXTRA_DESCRIPTION";
-    public static final String EXTRA_PRIORITY =
-            "com.example.mymvvmsampleapplicationusingroomandlivedatainarecyclerview.EXTRA_PRIORITY";
+    public static final String EXTRA_STATUS =
+            "com.example.mymvvmsampleapplicationusingroomandlivedatainarecyclerview.EXTRA_STATUS";
+    public static final String EXTRA_SNMP =
+            "com.example.mymvvmsampleapplicationusingroomandlivedatainarecyclerview.EXTRA_SNMP";
+    public static final String EXTRA_BANDWIDTH =
+            "com.example.mymvvmsampleapplicationusingroomandlivedatainarecyclerview.EXTRA_BANDWIDTH";
+    public static final String EXTRA_CPU =
+            "com.example.mymvvmsampleapplicationusingroomandlivedatainarecyclerview.EXTRA_CPU";
+    public static final String EXTRA_RAM =
+            "com.example.mymvvmsampleapplicationusingroomandlivedatainarecyclerview.EXTRA_RAM";
+    public static final String EXTRA_DISK =
+            "com.example.mymvvmsampleapplicationusingroomandlivedatainarecyclerview.EXTRA_DISK";
+    public static final String EXTRA_TIME =
+            "com.example.mymvvmsampleapplicationusingroomandlivedatainarecyclerview.EXTRA_TIME";
 
-    private EditText editTextTitle;
-    private EditText editTextDescription;
-    private NumberPicker numberPickerPriority;
+    private TextView editTextTitle;
+    private TextView editTextDescription;
+    private TextView editTextStatus;
+    private TextView editTextSnmp;
+    private TextView editTextBandwidth;
+    private TextView editTextCpu;
+    private TextView editTextRam;
+    private TextView editTextDisk;
+    private TextView editTextTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +52,13 @@ public class AddEditNoteActivity extends AppCompatActivity {
 
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextDescription = findViewById(R.id.edit_text_description);
-        numberPickerPriority = findViewById(R.id.number_picker_priority);
-
-        numberPickerPriority.setMinValue(1);
-        numberPickerPriority.setMaxValue(10);
+        editTextStatus = findViewById(R.id.edit_text_status);
+        editTextSnmp = findViewById(R.id.edit_text_snmp);
+        editTextBandwidth = findViewById(R.id.edit_text_bandwidth);
+        editTextCpu = findViewById(R.id.edit_text_cpu);
+        editTextRam = findViewById(R.id.edit_text_ram);
+        editTextDisk = findViewById(R.id.edit_text_disk);
+        editTextTime = findViewById(R.id.edit_text_time);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         Intent intent = getIntent();
@@ -44,28 +66,34 @@ public class AddEditNoteActivity extends AppCompatActivity {
             setTitle("Edit Note");
             editTextTitle.setText(intent.getStringExtra(EXTRA_TITLE));
             editTextDescription.setText(intent.getStringExtra(EXTRA_DESCRIPTION));
-            numberPickerPriority.setValue(intent.getIntExtra(EXTRA_PRIORITY,1));
+            editTextStatus.setText(intent.getStringExtra(EXTRA_STATUS));
+            editTextSnmp.setText(intent.getStringExtra(EXTRA_SNMP));
+            editTextBandwidth.setText(intent.getStringExtra(EXTRA_BANDWIDTH));
+            editTextCpu.setText(intent.getStringExtra(EXTRA_CPU));
+            editTextRam.setText(intent.getStringExtra(EXTRA_RAM));
+            editTextDisk.setText(intent.getStringExtra(EXTRA_DISK));
+            editTextTime.setText(intent.getStringExtra(EXTRA_TIME));
         } else {
             setTitle("Add Note");
         }
     }
 
-    private void saveNote() {
+/*    private void saveNote() {
         String title = editTextTitle.getText().toString();
         String description = editTextDescription.getText().toString();
-        int priority = numberPickerPriority.getValue();
+        String status = editTextStatus.getText().toString();
 
         if (title.trim().isEmpty() || description.trim().isEmpty()) {
             Toast.makeText(this, "Please Insert a Title And Description", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        //ideally should edit db from here
+        //ideally should edit db from here for insert/update
 
         Intent data = new Intent();
         data.putExtra(EXTRA_TITLE, title);
         data.putExtra(EXTRA_DESCRIPTION, description);
-        data.putExtra(EXTRA_PRIORITY, priority);
+        data.putExtra(EXTRA_STATUS, status);
 
         int id =getIntent().getIntExtra(EXTRA_ID,-1);
         if (id!=-1){
@@ -89,10 +117,9 @@ public class AddEditNoteActivity extends AppCompatActivity {
             case R.id.save_note:
                 saveNote();
                 return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
+*/
 }

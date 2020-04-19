@@ -10,6 +10,7 @@ import androidx.lifecycle.LiveData;
 
 public class NoteViewModel extends AndroidViewModel {
     private NoteRepository repository;
+    private LiveData<List<Note>> basicNotes;
     private LiveData<List<Note>> allNotes;
 
 
@@ -17,7 +18,7 @@ public class NoteViewModel extends AndroidViewModel {
         super(application);
         repository=new NoteRepository(application);
         allNotes=repository.getAllNotes();
-    }
+     }
 
     public void insert(Note note) {
         repository.insert(note);
@@ -33,6 +34,10 @@ public class NoteViewModel extends AndroidViewModel {
 
     public void deleteAll(){
         repository.deleteAllNotes();
+    }
+
+    public LiveData<List<Note>> getBasicNotes(){
+        return basicNotes;
     }
 
     public LiveData<List<Note>> getAllNotes(){

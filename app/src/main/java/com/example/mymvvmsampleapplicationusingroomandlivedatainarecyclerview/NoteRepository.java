@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 
 public class NoteRepository {
     private NoteDao noteDao;
+    private LiveData<List<Note>> basicNotes;
     private LiveData<List<Note>> allNotes;
 
     public NoteRepository(Application application){
@@ -19,6 +20,10 @@ public class NoteRepository {
 
     public void insert(Note note){
         new InsertNoteAsyncTask(noteDao).execute(note);
+    }
+
+    public void insertAllNotes(List<Note> listNotes) {
+        new InsertAllNoteAsyncTask(noteDao).execute(listNotes);
     }
 
     public void update(Note note){
@@ -46,6 +51,22 @@ public class NoteRepository {
         @Override
         protected Void doInBackground(Note... notes) {
         noteDao.insert(notes[0]);
+            return null;
+        }
+    }
+
+    private static class InsertAllNoteAsyncTask extends AsyncTask<List<Note>,Void,Void>{
+        private NoteDao noteDao;
+
+        private InsertAllNoteAsyncTask(NoteDao noteDao){
+            this.noteDao=noteDao;
+        }
+        @Override
+        protected Void doInBackground(List<Note>... lists) {
+            for (int i = 0; i < lists.length; i++) {
+                List<Note> listnote=lists[i];
+                noteDao.insert(listnote.get(0));
+            }
             return null;
         }
     }
